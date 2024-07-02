@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestfulApiExample.API.DTOs;
 using RestfulApiExample.API.Models;
 using RestfulApiExample.API.Services;
 
@@ -18,68 +18,73 @@ namespace RestfulApiExample.API.Controllers
 
 		// GET: api/products
 		[HttpGet]
-		public ActionResult<IEnumerable<Product>> GetProducts()
+		public IActionResult GetProducts()
 		{
-			return Ok(_productService.GetAll());
-		}
-
-		[HttpGet("list")]
-		public ActionResult<IEnumerable<Product>> ListProducts([FromQuery] string name)
-		{
-			return Ok(_productService.ListProducts(name));
+			var response = _productService.GetAll();
+			return Ok(response);
 		}
 
 		// GET: api/products/5
 		[HttpGet("{id}")]
-		public ActionResult<Product> GetProduct(int id)
+		public IActionResult GetById(int id)
 		{
-			var product = _productService.GetById(id);
-
-			if (product == null)
+			var response = _productService.GetById(id);
+			if (!response.IsSuccess)
 			{
-				return NotFound();
+				return NotFound(response);
 			}
-
-			return Ok(product);
+			return Ok(response);
 		}
 
 		// POST: api/products
 		[HttpPost]
-		public ActionResult<Product> PostProduct(Product product)
+		public IActionResult AddProduct([FromBody] Product product)
 		{
-			_productService.Add(product);
-			return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+			var response = _productService.Add(product);
+			return CreatedAtAction(nameof(GetById), new { id = response.Data.Id }, response);
+		}
+		// GET: api/products/sort?field=name&order=asc
+		[HttpGet("sort")]
+		public ActionResult<ApiResponseDto<List<Product>>> SortProducts([FromQuery] string field, [FromQuery] string order)
+		{
+			var response = _productService.SortProducts(field, order);
+			if (!response.IsSuccess)
+			{
+				return BadRequest(response);
+			}
+			return Ok(response);
 		}
 
 		// PUT: api/products/5
 		[HttpPut("{id}")]
-		public IActionResult PutProduct(int id, Product product)
+		public IActionResult PutProduct(int id, [FromBody] Product product)
 		{
-			if (id != product.Id)
+			var response = _productService.Update(id, product);
+			if (!response.IsSuccess)
 			{
-				return BadRequest();
+				return BadRequest(response);
 			}
-
-			var updateSuccess = _productService.Update(product);
-			if (!updateSuccess)
-			{
-				return NotFound();
-			}
-
-			return NoContent();
+			return Ok(response);
 		}
 
 		// DELETE: api/products/5
 		[HttpDelete("{id}")]
 		public IActionResult DeleteProduct(int id)
 		{
-			var deleteSuccess = _productService.Delete(id);
-			if (!deleteSuccess)
+			var response = _productService.Delete(id);
+			if (!response.IsSuccess)
 			{
-				return NotFound();
+				return NotFound(response);
 			}
+			return Ok(response);
+		}
 
-			return NoContent();
+		// GET: api/products/list?name=abc 
+		[HttpGet("list")]
+		public IActionResult GetProductsByName([FromQuery] string name)
+		{
+			var response = _productService.GetProductsByName(name);
+			return Ok(response);
 		}
 	}
 }

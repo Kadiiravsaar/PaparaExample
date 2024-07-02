@@ -16,7 +16,15 @@ namespace RestfulApiExample.API
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
-			builder.Services.AddScoped<IProductService, ProductService>();
+
+			// Her istek attýðýmda yenilensin istersem => AddScoped
+
+			//builder.Services.AddScoped<IProductService, ProductService>();
+
+
+			// _products listesi uygulama boyunca korunsun istiyorum o yüzden =>  AddSingleton 
+			builder.Services.AddSingleton<IProductService, ProductService>();
+
 
 			var app = builder.Build();
 
