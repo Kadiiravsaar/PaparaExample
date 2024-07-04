@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace RestfulApiExample.Repository.Repositories
 {
 
+	// Temel CRUD işlemleri için genel repo uygulaması
 	public class GenericRepository<T> : IGenericRepository<T> where T : class
 	{
 		protected readonly AppDbContext _context;

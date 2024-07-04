@@ -29,7 +29,7 @@ namespace RestfulApiExample.API.Controllers
 		{
 			var products = await _productService.GetAllAsync();
 			var productDtos = _mapper.Map<List<ProductDto>>(products);
-			return Ok(CustomResponseDto<List<Product>>.Success(200, products.ToList()));
+			return Ok(CustomResponseDto<List<ProductDto>>.Success(200, productDtos));
 		}
 
 		[HttpGet("{id}")]

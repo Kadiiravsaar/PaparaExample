@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestfulApiExample.Core.Services
 {
+	// Genel servis arayüzü, temel CRUD işlemleri sağlar
 	public interface IService<T> where T : class
 	{
 		Task<T> GetByIdAsync(int id);

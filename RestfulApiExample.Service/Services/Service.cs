@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace RestfulApiExample.Service.Services
 {
+	// Genel servis uygulaması, temel CRUD işlemleri sağlar
 	public class Service<T> : IService<T> where T : class
 	{
 		private readonly IGenericRepository<T> _repository;
