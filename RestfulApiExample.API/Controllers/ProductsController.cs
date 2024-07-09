@@ -52,10 +52,10 @@ namespace RestfulApiExample.API.Controllers
 
 		// PUT: api/Products/{id}
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, [FromBody] ProductDto productDto)
+		public async Task<IActionResult> Update(int id, [FromBody] UpdateProductDto updateProductDto)
 		{
 			var existingProduct = await _productService.GetByIdAsync(id);
-			_mapper.Map(productDto, existingProduct);
+			_mapper.Map(updateProductDto, existingProduct);
 			await _productService.UpdateAsync(existingProduct);
 			return NoContent();
 		}
