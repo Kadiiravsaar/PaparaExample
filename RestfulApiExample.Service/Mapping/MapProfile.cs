@@ -14,6 +14,7 @@ namespace RestfulApiExample.Service.Mapping
 		public MapProfile()
 		{
 			CreateMap<Product, ProductDto>().ReverseMap();
+			CreateMap<Product, UpdateProductDto>().ReverseMap();
 		}
 	}
 }
