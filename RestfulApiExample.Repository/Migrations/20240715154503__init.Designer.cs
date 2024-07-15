@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestfulApiExample.Repository.Context;
 
@@ -11,9 +12,11 @@ using RestfulApiExample.Repository.Context;
 namespace RestfulApiExample.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240715154503__init")]
+    partial class _init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +33,11 @@ namespace RestfulApiExample.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BookId")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -50,8 +50,7 @@ namespace RestfulApiExample.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookId")
-                        .IsUnique()
-                        .HasFilter("[BookId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Authors");
                 });
@@ -165,7 +164,9 @@ namespace RestfulApiExample.Repository.Migrations
                 {
                     b.HasOne("RestfulApiExample.Core.Models.Book", "Book")
                         .WithOne("Author")
-                        .HasForeignKey("RestfulApiExample.Core.Models.Author", "BookId");
+                        .HasForeignKey("RestfulApiExample.Core.Models.Author", "BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Book");
                 });
