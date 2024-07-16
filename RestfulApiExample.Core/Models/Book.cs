@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace RestfulApiExample.Core.Models
 {
-	public class Book
+	public class Book : BaseEntity
 	{
-		public int Id { get; set; }
 		public int GenreId { get; set; }
 		public string Title { get; set; }
 		public int PageCount { get; set; }
 		public DateTime PublishDate { get; set; }
-		public bool IsActive { get; set; } = true;
 		public Genre Genre { get; set; }
 		public Author Author { get; set; }
 	}
