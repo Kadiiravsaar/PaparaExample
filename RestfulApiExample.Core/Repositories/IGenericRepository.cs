@@ -11,9 +11,11 @@ namespace RestfulApiExample.Core.Repositories
 	public interface IGenericRepository<T> where T : class
 	{
 		IQueryable<T> GetAll();
+
+		Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
 		Task<T> GetByIdAsync(int id);
 		Task<T> AddAsync(T entity);
-		void Remove(T entity);
+		void Remove(T entity);	
 		void Update(T entity);
 	}
 }
