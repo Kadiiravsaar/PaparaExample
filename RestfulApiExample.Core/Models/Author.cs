@@ -9,7 +9,6 @@ namespace RestfulApiExample.Core.Models
 	public class Author : BaseEntity
 	{
 		
-		public int? BookId { get; set; }
 		public string Name { get; set; }
 		public string LastName { get; set; }
 		public DateTime DateOfBirth { get; set; }

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestfulApiExample.Core.Models
+namespace RestfulApiExample.Core.DTOs.Genre
 {
-	public class Genre : BaseEntity
+	public class GenreDto
 	{
+		public int Id { get; set; }
 		public string Name { get; set; }
-        public ICollection<Book> Books { get; set; }
-    }
+	}
 }
