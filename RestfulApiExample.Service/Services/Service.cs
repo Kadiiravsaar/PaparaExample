@@ -15,7 +15,7 @@ namespace RestfulApiExample.Service.Services
 	// Genel servis uygulaması, temel CRUD işlemleri sağlar
 	public class Service<T> : IService<T> where T : class
 	{
-		private readonly IGenericRepository<T> _repository;
+		protected readonly IGenericRepository<T> _repository;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public Service(IGenericRepository<T> repository, IUnitOfWork unitOfWork)
