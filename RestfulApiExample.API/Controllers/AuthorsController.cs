@@ -46,7 +46,7 @@ namespace RestfulApiExample.API.Controllers
 			var Author = _mapper.Map<Author>(createAuthorDto);
 			var newAuthor = await _authorService.AddAsync(Author);
 			var newAuthorDto = _mapper.Map<AuthorDto>(newAuthor);
-			return CreatedAtAction(nameof(GetById), new { id = newAuthor.Id }, CustomResponseDto<AuthorDto>.Success(201, newAuthorDto));
+			return CreatedAtAction(nameof(GetById), new { id = newAuthorDto.Id }, CustomResponseDto<AuthorDto>.Success(201, newAuthorDto));
 		}
 
 		// PUT: api/Authors/{id}
@@ -67,5 +67,14 @@ namespace RestfulApiExample.API.Controllers
 			await _authorService.RemoveAsync(Author);
 			return NoContent();
 		}
+
+		// DELETE: api/Authors/DeleteCondition/{id}
+		[HttpDelete("DeleteCondition/{id}")]
+		public async Task<IActionResult> DeleteCondition(int id)
+		{
+			await _authorService.ConditionRemoveAuthor(id);
+			return NoContent();
+		}
+
 	}
 }

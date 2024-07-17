@@ -45,7 +45,7 @@ namespace RestfulApiExample.API.Controllers
 			var book = _mapper.Map<Book>(createBookDto);
 			var newBook = await _bookService.AddAsync(book);
 			var newBookDto = _mapper.Map<BookDto>(newBook);
-			return CreatedAtAction(nameof(GetById), new { id = newBook.Id }, CustomResponseDto<BookDto>.Success(201, newBookDto));
+			return CreatedAtAction(nameof(GetById), new { id = newBookDto.Id }, CustomResponseDto<BookDto>.Success(201, newBookDto));
 		}
 
 		// PUT: api/Books/{id}
@@ -67,31 +67,6 @@ namespace RestfulApiExample.API.Controllers
 			return NoContent();
 		}
 
-		//// GET: api/Books/name?name=example
-		//[HttpGet("name")]
-		//public async Task<IActionResult> GetBooksByName(string name)
-		//{
-		//	var result = await _BookService.GetBooksByName(name);
-		//	return Ok(result);
-		//}
-
-
-
-		//// GET: api/Books/paged?page=1&pageSize=10
-		//[HttpGet("paged")]
-		//public async Task<IActionResult> GetPagedBooks([FromQuery] int page, [FromQuery] int pageSize)
-		//{
-		//	var result = await _BookService.GetPagedBooksAsync(page, pageSize);
-		//	return Ok(result);
-		//}
-
-		//// GET: api/Books/sort?field=name&order=asc
-		//[HttpGet("sort")]
-		//public async Task<IActionResult> SortBooks(string field, int order)
-		//{
-		//	var sortOrder = (SortOrder)order;
-		//	var result = await _bookService.SortBooks(field, sortOrder);
-		//	return Ok(result);
-		//}
+		
 	}
 }
