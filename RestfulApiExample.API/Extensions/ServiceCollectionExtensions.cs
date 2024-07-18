@@ -26,9 +26,21 @@ namespace RestfulApiExample.API.Extensions
 			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 			services.AddScoped<IProductRepository, ProductRepository>();
 
+
+			services.AddScoped<IBookRepository, BookRepository>();
+			services.AddScoped<IAuthorRepository, AuthorRepository>();
+			services.AddScoped<IGenreRepository, GenreRepository>();
+
+
+
+
 			// Add Services
 			services.AddScoped(typeof(IService<>), typeof(Service<>));
 			services.AddScoped<IProductService, ProductService>();
+			services.AddScoped<IGenreService, GenreService>();
+			services.AddScoped<IBookService, BookService>();
+			services.AddScoped<IAuthorService, AuthorService>();
+
 			services.AddScoped<FakeUserService>();
 
 

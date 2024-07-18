@@ -11,6 +11,7 @@ using RestfulApiExample.Repository.Repositories;
 using RestfulApiExample.Service.Mapping;
 using RestfulApiExample.Service.Services;
 using RestfulApiExample.Services.Validations;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace RestfulApiExample.API
 {
@@ -86,7 +87,10 @@ namespace RestfulApiExample.API
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();
-				app.UseSwaggerUI();
+				app.UseSwaggerUI(opt =>
+				{
+					opt.DocExpansion(DocExpansion.None);
+				});
 			}
 
 			app.UseHttpsRedirection();

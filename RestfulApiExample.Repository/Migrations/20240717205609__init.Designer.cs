@@ -12,8 +12,8 @@ using RestfulApiExample.Repository.Context;
 namespace RestfulApiExample.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240715155619_author-nullable-field")]
-    partial class authornullablefield
+    [Migration("20240717205609__init")]
+    partial class _init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,11 @@ namespace RestfulApiExample.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -49,10 +49,6 @@ namespace RestfulApiExample.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId")
-                        .IsUnique()
-                        .HasFilter("[BookId] IS NOT NULL");
-
                     b.ToTable("Authors");
                 });
 
@@ -63,6 +59,9 @@ namespace RestfulApiExample.Repository.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
@@ -81,6 +80,9 @@ namespace RestfulApiExample.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId")
+                        .IsUnique();
 
                     b.HasIndex("GenreId");
 
@@ -161,29 +163,28 @@ namespace RestfulApiExample.Repository.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("RestfulApiExample.Core.Models.Author", b =>
-                {
-                    b.HasOne("RestfulApiExample.Core.Models.Book", "Book")
-                        .WithOne("Author")
-                        .HasForeignKey("RestfulApiExample.Core.Models.Author", "BookId");
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("RestfulApiExample.Core.Models.Book", b =>
                 {
+                    b.HasOne("RestfulApiExample.Core.Models.Author", "Author")
+                        .WithOne("Book")
+                        .HasForeignKey("RestfulApiExample.Core.Models.Book", "AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RestfulApiExample.Core.Models.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Author");
+
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("RestfulApiExample.Core.Models.Book", b =>
+            modelBuilder.Entity("RestfulApiExample.Core.Models.Author", b =>
                 {
-                    b.Navigation("Author")
+                    b.Navigation("Book")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
