@@ -25,8 +25,13 @@ namespace RestfulApiExample.API.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
+			// Tüm türleri listeledik
 			var Genres = await _genreService.GetAllAsync();
+
+			// Genre nesnelerini GenreDto'ya dönüştürdük
 			var GenreDtos = _mapper.Map<List<GenreDto>>(Genres);
+
+			// Başarılı yanıt döndük(200)
 			return Ok(CustomResponseDto<List<GenreDto>>.Success(200, GenreDtos));
 		}
 
@@ -34,8 +39,13 @@ namespace RestfulApiExample.API.Controllers
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id)
 		{
+			// Belirli bir ID'ye sahip türü getirdik
 			var genre = await _genreService.GetByIdAsync(id);
+
+			// Genre nesnesini GenreDto'ya dönüştürdük
 			var genreDto = _mapper.Map<GenreDto>(genre);
+
+			// Başarılı yanıt döndük(200)
 			return Ok(CustomResponseDto<GenreDto>.Success(200, genreDto));
 		}
 
@@ -43,8 +53,11 @@ namespace RestfulApiExample.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add([FromBody] CreateGenreDto createGenreDto)
 		{
+			// gelen Dto'yu Genre'ye dönüştürdük ve ekledik(AddAsync)
 			var genre = _mapper.Map<Genre>(createGenreDto);
 			var newGenre = await _genreService.AddAsync(genre);
+
+			// newGenre'yi(Genre) GenreDto'ya Oluşturulan türün bilgilerini döndük
 			var newGenreDto = _mapper.Map<GenreDto>(newGenre);
 			return CreatedAtAction(nameof(GetById), new { id = newGenreDto.Id }, CustomResponseDto<GenreDto>.Success(201, newGenreDto));
 		}
@@ -63,8 +76,10 @@ namespace RestfulApiExample.API.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var Genre = await _genreService.GetByIdAsync(id);
-			await _genreService.RemoveAsync(Genre);
+			// Belirli bir ID'ye sahip türü sildik
+			var genre = await _genreService.GetByIdAsync(id);
+			await _genreService.RemoveAsync(genre);
+			// Başarılı yanıt döndük (Boş bir içerik)
 			return NoContent();
 		}
 	}

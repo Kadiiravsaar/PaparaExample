@@ -25,6 +25,7 @@ namespace RestfulApiExample.Repository.Repositories
 
 		public async Task<T> AddAsync(T entity)
 		{
+			// Yeni bir nesneyi veritabanına ekledik
 			await _dbSet.AddAsync(entity);
 			
 			return entity;
@@ -32,17 +33,19 @@ namespace RestfulApiExample.Repository.Repositories
 
 		public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
 		{
+			// Belirli bir koşula göre nesne var mı diye kontrol ettik
 			return await _dbSet.AnyAsync(predicate);
 		}	
 
 
 		public IQueryable<T> GetAll()
 		{
-			return _dbSet.AsNoTracking().AsQueryable();
+			return _dbSet.AsQueryable();
 		}
 
 		public async Task<T> GetByIdAsync(int id)
 		{
+			// Belirli bir ID'ye sahip nesneyi getirrdik
 			return await _dbSet.FindAsync(id);
 		}
 

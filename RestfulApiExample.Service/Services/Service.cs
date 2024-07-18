@@ -26,22 +26,26 @@ namespace RestfulApiExample.Service.Services
 
 		public async Task<T> AddAsync(T entity)
 		{
+			// Yeni bir nesne ekledik
 			var result = await _repository.AddAsync(entity);
-			await _unitOfWork.CommitAsync();
+			await _unitOfWork.CommitAsync(); // Değişiklikleri kaydettik
 			return result;
 		}
 
 		public async Task<IEnumerable<T>> GetAllAsync()
 		{
+			// Tüm nesneleri getirdik
 			return await _repository.GetAll().ToListAsync();
 		}
 
 		public async Task<T> GetByIdAsync(int id)
 		{
+			// Belirli bir ID'ye sahip nesneyi getirdik
 			var entity = await _repository.GetByIdAsync(id);
 			if (entity == null)
 			{
-				 throw new NotFoundException($"{typeof(T).Name} with id ({id}) not found");
+				// Eğer nesne bulunamazsa Exception fırlattık
+				throw new NotFoundException($"{typeof(T).Name} with id ({id}) not found");
 
 			}
 			return entity;
