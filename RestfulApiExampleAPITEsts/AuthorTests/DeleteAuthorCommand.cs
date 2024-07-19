@@ -21,7 +21,7 @@ namespace RestfulApiExampleAPITests.AuthorTests
 		{
 			var author = await _repository.GetByIdAsync(AuthorId);
 			if (author is null)
-				throw new InvalidOperationException("Author not found");
+				throw new InvalidOperationException("Author not found ");
 
 			_repository.Remove(author);
 		}
