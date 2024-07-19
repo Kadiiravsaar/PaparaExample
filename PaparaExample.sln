@@ -7,13 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Opdracht1", "Opdracht1", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.API", "Opdracht1\RestfulApiExample.API\RestfulApiExample.API.csproj", "{AE72CDA1-A077-4D84-9401-9CB95CB3CE29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApiExample.API", "RestfulApiExample.API\RestfulApiExample.API.csproj", "{943764A1-3062-47D6-BB25-5F1664AEB260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.API", "RestfulApiExample.API\RestfulApiExample.API.csproj", "{943764A1-3062-47D6-BB25-5F1664AEB260}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApiExample.Repository", "RestfulApiExample.Repository\RestfulApiExample.Repository.csproj", "{A2662123-3A7D-4867-8564-7ADEE78E5F4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.Repository", "RestfulApiExample.Repository\RestfulApiExample.Repository.csproj", "{A2662123-3A7D-4867-8564-7ADEE78E5F4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApiExample.Service", "RestfulApiExample.Service\RestfulApiExample.Service.csproj", "{5F3DB2AA-D3B3-4C75-A6BF-DE69CEE07124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.Service", "RestfulApiExample.Service\RestfulApiExample.Service.csproj", "{5F3DB2AA-D3B3-4C75-A6BF-DE69CEE07124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApiExample.Core", "RestfulApiExample.Core\RestfulApiExample.Core.csproj", "{24C1FA14-E096-493B-9120-3F122AA9F11A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.Core", "RestfulApiExample.Core\RestfulApiExample.Core.csproj", "{24C1FA14-E096-493B-9120-3F122AA9F11A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExampleAPITests", "RestfulApiExampleAPITEsts\RestfulApiExampleAPITests.csproj", "{12BA94B0-6DFB-4D8E-BE37-BBB3C1C25A20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{24C1FA14-E096-493B-9120-3F122AA9F11A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C1FA14-E096-493B-9120-3F122AA9F11A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C1FA14-E096-493B-9120-3F122AA9F11A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12BA94B0-6DFB-4D8E-BE37-BBB3C1C25A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12BA94B0-6DFB-4D8E-BE37-BBB3C1C25A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12BA94B0-6DFB-4D8E-BE37-BBB3C1C25A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12BA94B0-6DFB-4D8E-BE37-BBB3C1C25A20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
